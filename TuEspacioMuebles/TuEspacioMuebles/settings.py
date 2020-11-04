@@ -38,9 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'registration',
+    #'registration',
     'usuario',
-    'producto',
 ]
 
 MIDDLEWARE = [
@@ -55,10 +54,12 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'TuEspacioMuebles.urls'
 
+MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, "templates")],
+        'DIRS': [os.path.join(BASE_DIR, 'templates', 'producto')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

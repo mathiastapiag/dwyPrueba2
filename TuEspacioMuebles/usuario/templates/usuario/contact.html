@@ -1,0 +1,73 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+
+
+    <section id="top_banner">
+        <div class="banner">
+            <div class="inner text-center">
+                <h2></h2>
+            </div>
+        </div>
+        <div class="page_info">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-8 col-sm-8 col-xs-6">
+                        <h4>Contactanos</h4>
+                    </div>
+                    <div class="col-md-4 col-sm-4 col-xs-6" style="text-align:right;">Inicio<span class="sep"> / </span><span class="current">Contactanos</span></div>
+                </div>
+            </div>
+        </div>
+
+        </div>
+    </section>
+    <section id="contact-page">
+        <div class="container">
+            <div class="section-heading text-center">
+                <h2>Déjanos tu <span>Mensaje</span></h2>
+                <p class="subheading">Rellena el siguiente formulario para enviarnos tu solicitud.</p>
+            </div>
+            <div class="row contact-wrap">
+                <div class="status alert alert-success" style="display: none"></div>
+                <form id="main-contact-form" class="contact-form" name="contact-form" method="post">
+                    <div class="col-sm-5 col-sm-offset-1">
+                        <div class="form-group">
+                            <label>Nombre *</label>
+                            <input type="text" name="name" id="idNombreContact" class="form-control" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>Email *</label>
+                            <input type="email" name="email" id="idEmailContact" class="form-control" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>Teléfono</label>
+                            <input type="number" id="idTelefonoContact" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label>Empresa o Compa&ntilde;&iacute;a</label>
+                            <input type="text" class="form-control">
+                        </div>
+                    </div>
+                    <div class="col-sm-5">
+                        <div class="form-group">
+                            <label>Asunto *</label>
+                            <input type="text" name="subject" id="idAsuntoContact" class="form-control" required="required">
+                        </div>
+                        <div class="form-group">
+                            <label>Mensaje *</label>
+                            <textarea name="message" id="idMensajeContact" required="required" class="form-control" rows="8"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <button type="submit" name="submit" class="btn btn-default submit-button" onclick="onClickContact()">Enviar Solicitud <i class="fa fa-caret-right"></i></button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

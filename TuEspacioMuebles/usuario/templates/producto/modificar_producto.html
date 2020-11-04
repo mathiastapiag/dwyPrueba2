@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+
+{% block content %}
+
+<h1>Modificar Producto</h1>
+    <br><br>
+    <form action="modificar_producto" method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <input type="hidden" name="id_producto" value="{{producto.id_producto}}">
+        <br><br>
+        <label>Nombre del Producto   :</label><input type="text" name="nombre_producto" value="{{ producto.nombre_producto }}"><br>
+        <label>Precio:</label><input type="text" name="precio" value="{{ producto.precio }}"><br>
+        <label>Stock:</label><input type="text" name="stock" value="{{ producto.stock }}"><br>
+
+        <tr><td><label>Foto     :</label><td>
+                 <input type="file" name="foto" id="foto">
+        {% if producto.foto %}
+           <tr><td><p>{{producto.foto.url }}</p></td></tr>
+          <tr><td><p><img src="{{producto.foto.url}}"></p></td></tr>
+        {% endif %}
+
+        <input type="submit" name="modificar_producto" value="Modificar">
+    </form>
+
+
+{% endblock %}
