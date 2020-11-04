@@ -54,6 +54,7 @@ def registrarse(request):
 
                mensaje = "Usuario registrado correctamente."
                messages.success(request, mensaje)
+               return redirect('index')
            except usuario.DoesNotExist:
                mensaje = "El Usuario no existe."
                messages.error(request, mensaje)
@@ -69,6 +70,30 @@ def registrarse(request):
 
 def login(request):
     print("ok, estamos en la vista")
+    usuario = Usuario()
+
+    if request.method == "POST":
+        print("Entré al primer IF")
+        mi_email = request.POST['email']
+        mi_pass = request.POST['password']
+        if mi_email != "":
+            print("Entré al segundo IF")
+            try:
+                print("Entré al TRY")
+                user_email = Usuario.objects.filter(email=mi_email)
+                print(user_email)
+                user_pass = Usuario.objects.filter(password=mi_pass)
+                print(user_pass)
+                if user_email == mi_email: #Aquí se cae
+                    print("email validado")
+                    return redirect('index')
+                else:
+                    print("Me caí en el email")
+                    messages.error(request, "Error al Iniciar Sesión")
+                    return redirect('login')
+            except usuario.DoesNotExist:
+                user_email = None
+                user_pass = None
     context={}
     return render(request,'usuario/login.html', context)
 
@@ -77,8 +102,28 @@ def login(request):
 #PRODUCTO
 def agregar_producto(request):
     print("ok, estamos en la vista")
+    if request.method == "POST":
+        print("Entré al primer IF")
+        producto = Producto()
+        producto.nombre_producto = request.POST.get('nombre_producto')
+        producto.precio = request.POST.get('precio')
+        producto.stock = request.POST.get('stock')
+        producto.foto = request.FILES.get('foto')
+        producto.activo = request.POST.get('activo')
+        try:
+            print("Entré al TRY")
+            producto.save()
+            messages.success(request, 'Producto agregado correctamente.')
+        except:
+            print("Me caí en el except )=")
+            messages.error(request, 'No se pudo modificar el Producto.')
+        return redirect('listar_producto')
+    else:
+        print("No entré al IF")
     context={}
-    return render(request,'usuario/index.html', context)
+    return render(request, 'producto/agregar_producto.html', context)
+
+
 
 
 def listar_producto(request):
@@ -107,7 +152,8 @@ def modificar_producto(request, id):
     print("ok, estamos en la vista")
     producto = Producto.objects.get(id_producto=id)
     context={'producto':producto}
-    if request.POST:
+    if request.method == "POST":
+        print("Entré al primer IF")
         producto = Producto()
         producto.id_producto = request.POST.get('id_producto')
         producto.nombre_producto = request.POST.get('nombre_producto')
@@ -115,21 +161,15 @@ def modificar_producto(request, id):
         producto.stock = request.POST.get('stock')
         producto.foto = request.FILES.get('foto')
         producto.activo = request.POST.get('activo')
-
         try:
+            print("Entré al TRY")
             producto.save()
             messages.success(request, 'Producto modificado correctamente.')
         except:
+            print("Me caí en el except )=")
             messages.error(request, 'No se pudo modificar el Producto.')
-        return redirect('listar_producto.html')
-
+        return redirect('listar_producto')
+    else:
+        print("No entré al IF")
     return render(request,'producto/modificar_producto.html',context)
 
-#def editar_producto(request):
- #   if request.method == 'POST':
-
-
-#def listar(request):
-#    print("ok, estamos en la vista listar")
-#    context={}
-#    return render(request,'personas/listar.html', context)

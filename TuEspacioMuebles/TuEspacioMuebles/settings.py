@@ -59,7 +59,7 @@ MESSAGE_STORAGE = 'django.contrib.messages.storage.session.SessionStorage'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates', 'producto')],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -145,5 +145,5 @@ ACCOUNT_ACTIVATION_DAYS = 7
 REGISTRATION_OPEN = True
 SITE_ID = 1
 
-LOGIN_REDIRECT_URL = '/personas/index'  # The page you want users to arrive at after they successful log in
+LOGIN_REDIRECT_URL = '/usuario/index'  # The page you want users to arrive at after they successful log in
 LOGIN_URL = '/accounts/login/'

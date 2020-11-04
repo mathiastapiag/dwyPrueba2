@@ -4,12 +4,13 @@
 
 {% block content %}
 
-<h1>Modificar Producto</h1>
+    <h2>Modificar Producto</h2>
     <br><br>
-    <form action="modificar_producto" method="POST" enctype="multipart/form-data">
+    <form action="" method="POST" enctype="multipart/form-data">
         {% csrf_token %}
 
         <input type="hidden" name="id_producto" value="{{producto.id_producto}}">
+        <input type="hidden" name="activo" value="{{producto.activo}}">
         <br><br>
         <label>Nombre del Producto   :</label><input type="text" name="nombre_producto" value="{{ producto.nombre_producto }}"><br>
         <label>Precio:</label><input type="text" name="precio" value="{{ producto.precio }}"><br>
