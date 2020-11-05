@@ -84,7 +84,7 @@ def login(request):
                 print(user_email)
                 user_pass = Usuario.objects.filter(password=mi_pass)
                 print(user_pass)
-                if user_email == mi_email: #Aquí se cae
+                if user_email: #Aquí se cae
                     print("email validado")
                     return redirect('index')
                 else:
