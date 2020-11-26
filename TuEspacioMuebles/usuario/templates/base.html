@@ -2,6 +2,11 @@
 
 <html lang="en">
 <head>
+
+    {% load pwa %}
+    {% progressive_web_app_meta %}
+
+
     {% load static %}
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -15,6 +20,22 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.3.1/js/bootstrap.min.js"></script>
 
+    <script src='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.js'></script>
+    <link href='https://api.mapbox.com/mapbox-gl-js/v1.12.0/mapbox-gl.css' rel='stylesheet' />
+    <style>
+        #map{
+            width: 400px;
+            height: 300px;
+        }
+        .marker{
+            background-image: url('https://cdn0.iconfinder.com/data/icons/small-n-flat/24/678111-map-marker-512.png');
+            background-size: cover;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+        }
+    </style>
 
 </head>
 <body id="wrapper">
@@ -63,7 +84,7 @@
                             <li><a href="index">Inicio</a></li>
                             <li><a href="mision">Misión y Visión</a></li>
                             <li><a href="about">¿Quiénes Somos?</a></li>
-                            <li><a href="contact">Contactanos</a></li>
+                            <li><a href="contact">Contactanos + API</a></li>
                             <li><a href="registrarse">Registrarse</a></li>
                             <li><a href="login">Iniciar Sesión</a></li>
                         </ul>
@@ -137,6 +158,26 @@
     <!--JavaScript at end of body for optimized loading-->
     <script type="text/javascript" src="{%  static 'script/index.js' %}"></script>
 
+
+    <script>
+      mapboxgl.accessToken = 'pk.eyJ1IjoibWF0aGlhc3RhcGlhZyIsImEiOiJja2hxanhubDcwMGhvMnBxbTZlZGk4c2w2In0.gx7vVQ-X5y_mrrdM0yqkzw';
+      var map = new mapboxgl.Map({
+        container: 'map',
+        style: 'mapbox://styles/mapbox/streets-v11',
+        center: [-70.7079034, -33.5854441],
+        zoom: 10
+      });
+
+      var element = document.createElement('div');
+      element.className = 'marker'
+
+
+      var marker = new mapboxgl.Marker(element)
+      .setLngLat({
+        lng:-70.7079034,
+        lat:-33.5854441
+      }).addTo(map);
+    </script>
     {% block javascript%}
 
     {% endblock%}

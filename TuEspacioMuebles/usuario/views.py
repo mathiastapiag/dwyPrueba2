@@ -85,8 +85,12 @@ def login(request):
                 user_pass = Usuario.objects.filter(password=mi_pass)
                 print(user_pass)
                 if user_email: #Aquí se cae
-                    print("email validado")
-                    return redirect('index')
+                    if user_pass:
+                        print("email validado")
+                        return redirect('listar_producto')
+                    else:
+                        messages.error(request, "Error al Iniciar Sesión")
+                        return redirect('login')
                 else:
                     print("Me caí en el email")
                     messages.error(request, "Error al Iniciar Sesión")

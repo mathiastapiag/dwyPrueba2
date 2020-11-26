@@ -25,6 +25,8 @@ urlpatterns = [
     #path('producto/', include('producto.urls')),
     path('admin/', admin.site.urls),
     #url(r'^accounts/', include('registration.backends.default.urls')),
+    path('', include('pwa.urls')),
+    path('oauth/', include('social_django.urls', namespace='social')),
 ]
 
 urlpatterns += staticfiles_urlpatterns()
